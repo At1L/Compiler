@@ -131,11 +131,15 @@
     <ClCompile Include="compiler.cpp" />
     <ClCompile Include="Hash.cpp" />
     <ClCompile Include="lexicalAnalyzer.cpp" />
+    <ClCompile Include="syntaxAnalyzer.cpp" />
+    <ClCompile Include="SyntaxTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Automat.h" />
     <ClInclude Include="Hash.h" />
     <ClInclude Include="lexicalAnalyzer.h" />
+    <ClInclude Include="syntaxAnalyzer.h" />
+    <ClInclude Include="SyntaxTree.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />

@@ -1,7 +1,2 @@
-﻿  Automat.cpp
-  Hash.cpp
-C:\Users\Arseny\Desktop\EMP\compiler\compiler\Hash.cpp(33,12): warning C4244: инициализация: преобразование "ll" в "int", возможна потеря данных
-  compiler.cpp
-  lexicalAnalyzer.cpp
-  Создание кода...
+﻿  syntaxAnalyzer.cpp
   compiler.vcxproj -> C:\Users\Arseny\Desktop\EMP\compiler\x64\Debug\compiler.exe

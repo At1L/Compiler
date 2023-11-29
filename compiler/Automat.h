@@ -16,7 +16,7 @@ public:
 	//in first array we save all operations
 	vector<char> opExpr = { '+', '-', '=' };
 	//in first array we save all delimiters
-	vector<char> delExpr = { ';', ':', ','};
+	vector<char> delExpr = { ';', ':', ',', '(', ')'};
 	//in second array we will save all keywords
 	vector<string> keywords = { "begin", "end", "int", "char", "procedure"};
 

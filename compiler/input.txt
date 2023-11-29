@@ -1,9 +1,8 @@
 procedure test; begin
 var
-a, b, c : integer;
-begin
-a := 1;
-b := 1;
-c := a + b;
-c := c - 1;
+a, b, c, k : integer;
+f, u : char;
+c := (c - 1);
+c := (a + b) + 5;
+c := h + (u + i);
 end

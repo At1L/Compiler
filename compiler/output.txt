@@ -1,16 +1,89 @@
-1419: {Op | +} 
-1452: {Del | ,} 
-1485: {Op | -} 
-1617: {Const | 1} 
-1914: {Del | :} 
-1947: {Del | ;} 
-3201: {Id | a} 
-3234: {Id | b} 
-3267: {Id | c} 
-4521: {Id | var} 
-10688: {Id | test} 
-12590: {Id | integer} 
-15223: {Keyword | end} 
-25161: {Keyword | procedure} 
-42949: {Keyword | begin} 
-68343: {Op | :=} 
+PROCEDURE
+	BEGIN
+		procedure Keyword
+		test Id
+		; Del
+		begin Keyword
+	DESCRIPTIONS
+		var
+		DESCRIPTIONS
+			DescrList
+				VARLIST
+					a Id
+					, Del
+					DescrList
+						b Id
+						, Del
+						DescrList
+							c Id
+							, Del
+							DescrList
+								k Id
+				: Del
+				integer Id
+				; Del
+			DESCRIPTIONS
+				DescrList
+					VARLIST
+						f Id
+						, Del
+						DescrList
+							u Id
+					: Del
+					char Keyword
+					; Del
+				DESCRIPTIONS
+	OPERATORS
+		OP
+			c Id
+			:= Op
+			EXPR
+				SIMPLE_EXPR
+					( Del
+					EXPR
+						SIMPLE_EXPR
+							c Id
+						- Op
+						SIMPLE_EXPR
+							1 Const
+					) Del
+			; Del
+		OPERATORS
+			OP
+				c Id
+				:= Op
+				EXPR
+					SIMPLE_EXPR
+						( Del
+						EXPR
+							SIMPLE_EXPR
+								a Id
+							+ Op
+							SIMPLE_EXPR
+								b Id
+						) Del
+					+ Op
+					SIMPLE_EXPR
+						5 Const
+				; Del
+			OPERATORS
+				OP
+					c Id
+					:= Op
+					EXPR
+						SIMPLE_EXPR
+							h Id
+						+ Op
+						SIMPLE_EXPR
+							( Del
+							EXPR
+								SIMPLE_EXPR
+									u Id
+								+ Op
+								SIMPLE_EXPR
+									i Id
+							) Del
+					; Del
+				OPERATORS
+	END
+		end Keyword
