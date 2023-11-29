@@ -13,7 +13,7 @@ int main()
         sint.print(out);
     }
     else {
-        cout << "dolboyobi\n";
+        cout << "Error happened\n";
     }
 
     

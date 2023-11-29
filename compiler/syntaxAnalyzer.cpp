@@ -19,8 +19,6 @@ bool syntaxAnalyzer::Procedure(SyntaxTree& tree)
 	tree.addNode("var", "DESCRIPTIONS");
 	tree.addNode("DESCR", "DESCRIPTIONS");
     if (!Description(temp)) return 0;
-    //tree.addNode("DESCRIPTIONS", "PROCEDURE");
-    //tree.insertNode(temp, "DESCRIPTIONS");
 	tree.insertNode(temp, "DESCR");
     temp.cleaner();
 
@@ -87,21 +85,6 @@ bool syntaxAnalyzer::Description(SyntaxTree& tree)
 	lex.backPos(in, buff.name);
 	Description(tmp);
 	tree.insertNode(tmp, tree.getRoot().getData());
-
-   /* while (true) {
-        Token elem = lex.parse(in);
-        if (elem.type != "Id") {
-            lex.backPos(in, elem.name);
-            return 1;
-        }
-        lex.backPos(in, elem.name);
-        temp.setRoot("DESCR");
-        if (!Descr(temp))
-            return 0;
-        tree.addNode("DESCR", "DESCRIPTIONS");
-        tree.insertNode(temp, "DESCR");
-        temp.cleaner();
-    }*/
     return 1;
 }
 
@@ -133,7 +116,6 @@ bool syntaxAnalyzer::Descr(SyntaxTree& tree)
 	elem = lex.parse(in);
 	if (elem.name != ";") return 0;
 	tree.addNode(elem.name + " " + elem.type, "DescrList");
-	//tree.insertNode(temp, "DescrList");
     return 1;
 }
 
@@ -212,34 +194,10 @@ bool syntaxAnalyzer::Operators(SyntaxTree& tree)
     SyntaxTree temp("OP");
     if (!Op(temp)) return 0;
     tree.insertSon(temp, "OPERATORS");
-    //temp.cleaner();
 	tree.addNode("OPERATORS", tree.getRoot().getData());
 	SyntaxTree buff("OPERATORS");
 	Operators(buff);
 	tree.insertNode(buff, tree.getRoot().getData());
-
-
-
-
-
-
-  //  while (true) {
-  //      Token elem = lex.parse(in);
-  //      if (elem.type != "Id") {
-  //          lex.backPos(in, elem.name);
-  //          return 1;
-  //      }
-  //      lex.backPos(in, elem.name);
-  //      temp.setRoot("OP");
-  //      if (!Op(temp)) return 0;
-  //      //tree.addNode("operators", "operators");
-  //      tree.insertNode(temp, "operators");
-		//tree.addNode("operators", tree.getRoot().getData());
-  //      //temp.cleaner();
-		//SyntaxTree buff("operators");
-		//Operators(buff);
-		//tree.insertNode(buff, tree.getRoot().getData());
-  //  }
     return 1;
 }
 
@@ -324,15 +282,7 @@ bool syntaxAnalyzer::SimplExpr(SyntaxTree& tree)
 		return 1;
 	}
 	else if (elem.type != "Id" && elem.type != "Const" && elem.type != "strConst") return 0;
-	//else if (!Expr(temp))return 0;
-	//tree.insertSon(temp, "SIMPLE_EXPR");
 	tree.addNode(elem.name + " " + elem.type, "SIMPLE_EXPR");
-	/*temp.cleaner();
-	temp.setRoot("EXPR"); 
-	if (!Expr(temp))
-		return 0;
-	tree.addNode("EXPR", "SIMPLE_EXPR");
-	tree.insertNode(temp, "EXPR");*/
 	return 1;
 }
 

@@ -18,7 +18,6 @@ void SyntaxTree::addNode(std::string data, std::string father, TreeNode& node){
 
 void SyntaxTree::copy(TreeNode& from, TreeNode& to)
 {
-	//to.setData(from.getData());
 	to = from;
 	for (size_t i = 0; i < from.getChildren().size(); i++)
 		copy(from.getChildren()[i], to.getChildren()[i]);
@@ -72,4 +71,3 @@ TreeNode SyntaxTree::getRoot()
 {
 	return root;
 }
-
