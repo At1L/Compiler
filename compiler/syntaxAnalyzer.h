@@ -12,7 +12,7 @@ class syntaxAnalyzer
 	bool Description(SyntaxTree&);
 	bool Descr(SyntaxTree&);
 	bool VarList(SyntaxTree&);
-	bool Vlist(SyntaxTree&);
+	bool MaxVerstappen(SyntaxTree&);
 	bool Operators(SyntaxTree&);
 	bool Op(SyntaxTree&);
 	bool Expr(SyntaxTree&);

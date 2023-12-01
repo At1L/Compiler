@@ -9,7 +9,7 @@ bool syntaxAnalyzer::Procedure(SyntaxTree& tree)
     tree.insertSon(temp, "PROCEDURE");
     temp.cleaner();
 
-    temp.setRoot("DESCRIPTIONS");
+    temp.setRoot("DescrList");
 	Token buff = lex.parse(in);
 	if (buff.name != "var") {
 		std::cout << "Var not found\n";
@@ -17,9 +17,9 @@ bool syntaxAnalyzer::Procedure(SyntaxTree& tree)
 	}
 	tree.addNode("DESCRIPTIONS", "PROCEDURE");
 	tree.addNode("var", "DESCRIPTIONS");
-	tree.addNode("DESCR", "DESCRIPTIONS");
+	tree.addNode("DescrList", "DESCRIPTIONS");
     if (!Description(temp)) return 0;
-	tree.insertNode(temp, "DESCR");
+	tree.insertNode(temp, "DescrList");
     temp.cleaner();
 
     temp.setRoot("OPERATORS");
@@ -33,8 +33,7 @@ bool syntaxAnalyzer::Procedure(SyntaxTree& tree)
     tree.addNode("END", "PROCEDURE");
     tree.insertNode(temp, "END");
 
-
-    return 1;
+    return (lex.parse(in).name == "None");
 }
 
 bool syntaxAnalyzer::Begin(SyntaxTree& tree)
@@ -68,21 +67,23 @@ bool syntaxAnalyzer::Begin(SyntaxTree& tree)
 
 bool syntaxAnalyzer::Description(SyntaxTree& tree)
 {
-    SyntaxTree temp("DescrList");
+    SyntaxTree temp("Descr");
     if (!Descr(temp))
         return 0;
-    tree.insertSon(temp, "DESCRIPTIONS");
-	SyntaxTree tmp("DESCRIPTIONS");
-	tree.addNode("DESCRIPTIONS", tree.getRoot().getData());
+    tree.insertSon(temp, "DescrList");
+	SyntaxTree tmp("DescrList");
+	//tree.addNode("DescrList", tree.getRoot().getData());
 	Token buff = lex.parse(in);
 	Token buff_ = lex.parse(in);
 	if (buff.type == "Id" && buff_.name == ":=") {
 		lex.backPos(in, buff_.name);
 		lex.backPos(in, buff.name);
+
 		return 1;
 	}
 	lex.backPos(in, buff_.name);
 	lex.backPos(in, buff.name);
+	tree.addNode("DescrList", tree.getRoot().getData());
 	Description(tmp);
 	tree.insertNode(tmp, tree.getRoot().getData());
     return 1;
@@ -109,13 +110,14 @@ bool syntaxAnalyzer::Descr(SyntaxTree& tree)
     if (elem.name != ":") {
 		return 0;
     }
-    tree.addNode(elem.name + " " + elem.type, "DescrList");
+    tree.addNode(elem.name + " " + elem.type, "Descr");
 	elem = lex.parse(in);
 	if (elem.name != "integer" && elem.name != "char") return 0;
-	tree.addNode(elem.name + " " + elem.type, "DescrList");
+	tree.addNode("Type", "Descr");
+	tree.addNode(elem.name + " " + elem.type, "Type");
 	elem = lex.parse(in);
 	if (elem.name != ";") return 0;
-	tree.addNode(elem.name + " " + elem.type, "DescrList");
+	tree.addNode(elem.name + " " + elem.type, "Descr");
     return 1;
 }
 
@@ -147,21 +149,21 @@ bool syntaxAnalyzer::VarList(SyntaxTree& tree)
             return 1;
         }
         tree.addNode(elem.name + " " + elem.type, "VARLIST");
-		SyntaxTree temp("DescrList");
-		if (!Vlist(temp)) return 0;
-		tree.addNode("DescrList", "VARLIST");
-		tree.insertNode(temp, "DescrList");
+		SyntaxTree temp("VARLIST");
+		if (!MaxVerstappen(temp)) return 0;
+		tree.addNode("VARLIST", "VARLIST");
+		tree.insertNode(temp, "VARLIST");
     }
     return 1;
 }
-bool syntaxAnalyzer::Vlist(SyntaxTree& tree)
+bool syntaxAnalyzer::MaxVerstappen(SyntaxTree& tree)
 {
 	Token elem = lex.parse(in);
 	if (elem.type != "Id") {
 		cout << "Varlist error\n";
 		return 0;
 	}
-	tree.addNode(elem.name + " " + elem.type, "DescrList");
+	tree.addNode(elem.name + " " + elem.type, "VARLIST");
 	while (true) {
 		elem = lex.parse(in);
 		if(elem.name == ":") {
@@ -173,11 +175,11 @@ bool syntaxAnalyzer::Vlist(SyntaxTree& tree)
 			return 1;
 		}
 		
-		tree.addNode(elem.name + " " + elem.type, "DescrList");
-		SyntaxTree temp("DescrList");
-		if (!Vlist(temp)) return 0;
-		tree.addNode("DescrList", "DescrList");
-		tree.insertNode(temp, "DescrList");
+		tree.addNode(elem.name + " " + elem.type, "VARLIST");
+		SyntaxTree temp("VARLIST");
+		if (!MaxVerstappen(temp)) return 0;
+		tree.addNode("VARLIST", "VARLIST");
+		tree.insertNode(temp, "VARLIST");
 	}
 	return 1;
 }
@@ -194,10 +196,13 @@ bool syntaxAnalyzer::Operators(SyntaxTree& tree)
     SyntaxTree temp("OP");
     if (!Op(temp)) return 0;
     tree.insertSon(temp, "OPERATORS");
-	tree.addNode("OPERATORS", tree.getRoot().getData());
 	SyntaxTree buff("OPERATORS");
 	Operators(buff);
-	tree.insertNode(buff, tree.getRoot().getData());
+	if (buff.getRoot().getChildren().size() != 0)
+	{
+		tree.addNode("OPERATORS", tree.getRoot().getData());
+		tree.insertNode(buff, tree.getRoot().getData());
+	}
     return 1;
 }
 
@@ -227,6 +232,7 @@ bool syntaxAnalyzer::Op(SyntaxTree& tree)
 		}
 
 		tree.addNode(elem.name + " " + elem.type, "OP");
+		elem = lex.parse(in);
 	}
 	else {
 		cout << "Waiting for Id\n";

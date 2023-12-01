@@ -6,33 +6,34 @@ PROCEDURE
 		begin Keyword
 	DESCRIPTIONS
 		var
-		DESCRIPTIONS
-			DescrList
+		DescrList
+			Descr
 				VARLIST
 					a Id
 					, Del
-					DescrList
+					VARLIST
 						b Id
 						, Del
-						DescrList
+						VARLIST
 							c Id
 							, Del
-							DescrList
+							VARLIST
 								k Id
 				: Del
-				integer Id
+				Type
+					integer Keyword
 				; Del
-			DESCRIPTIONS
-				DescrList
+			DescrList
+				Descr
 					VARLIST
 						f Id
 						, Del
-						DescrList
+						VARLIST
 							u Id
 					: Del
-					char Keyword
+					Type
+						char Keyword
 					; Del
-				DESCRIPTIONS
 	OPERATORS
 		OP
 			c Id
@@ -42,11 +43,14 @@ PROCEDURE
 					( Del
 					EXPR
 						SIMPLE_EXPR
-							c Id
-						- Op
+							2 Const
+						+ Op
 						SIMPLE_EXPR
-							1 Const
+							a Id
 					) Del
+				- Op
+				SIMPLE_EXPR
+					b Id
 			; Del
 		OPERATORS
 			OP
@@ -54,17 +58,10 @@ PROCEDURE
 				:= Op
 				EXPR
 					SIMPLE_EXPR
-						( Del
-						EXPR
-							SIMPLE_EXPR
-								a Id
-							+ Op
-							SIMPLE_EXPR
-								b Id
-						) Del
+						a Id
 					+ Op
 					SIMPLE_EXPR
-						5 Const
+						b Id
 				; Del
 			OPERATORS
 				OP
@@ -72,18 +69,10 @@ PROCEDURE
 					:= Op
 					EXPR
 						SIMPLE_EXPR
-							h Id
+							a Id
 						+ Op
 						SIMPLE_EXPR
-							( Del
-							EXPR
-								SIMPLE_EXPR
-									u Id
-								+ Op
-								SIMPLE_EXPR
-									i Id
-							) Del
+							b Id
 					; Del
-				OPERATORS
 	END
 		end Keyword

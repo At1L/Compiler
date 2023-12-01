@@ -18,7 +18,7 @@ public:
 	//in first array we save all delimiters
 	vector<char> delExpr = { ';', ':', ',', '(', ')'};
 	//in second array we will save all keywords
-	vector<string> keywords = { "begin", "end", "int", "char", "procedure"};
+	vector<string> keywords = { "begin", "end", "integer", "char", "procedure"};
 
 	vector<vector<int>> TransitTable;
 	//func that will return tokens from given(current) line

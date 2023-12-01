@@ -27,7 +27,7 @@ bool isDel(std::vector<char>& dels, char c) {
 	return false;
 }
 bool isDel(char c) {
-    vector<char> sym = { ' ', '\n', '\t' };
+    vector<char> sym = { ' ', '\n', '\t', '\0'};
     for (char ch : sym) if (ch == c) return true;
     return false;
 }
@@ -48,13 +48,6 @@ string lexicalAnalyzer::curWord(ifstream& fin)
     while (true)
     {
         char c = fin.get();
-        if (c < 0 && tmp.size() != 0) return tmp;
-        else if (c < 0 && tmp.size() == 0) return "";
-        if (fin.eof())
-        {
-            break;
-        }
-
         if (isDel(c))
         {
             if (!tmp.empty())
@@ -67,6 +60,14 @@ string lexicalAnalyzer::curWord(ifstream& fin)
                 continue;
             }
         }
+        if (c < 0 && tmp.size() != 0) return tmp;
+        else if (c < 0 && tmp.size() == 0) return "";
+        if (fin.eof())
+        {
+            break;
+        }
+
+        
         if (isOp(c)) 
         {
             if (!tmp.empty())
@@ -133,6 +134,7 @@ Token lexicalAnalyzer::parse(ifstream& in)
         token.type = "Op";
         return token;
     }
+    if (buff.empty()) return Token();
     Token token = a.getTokens(buff)[0];
 	return token;
 }
