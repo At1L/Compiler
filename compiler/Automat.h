@@ -3,11 +3,15 @@
 #include <vector>
 #include <string>
 using namespace std;
-struct Token
+struct ourToken
 {
 	//save type and name of lex
 	string type = "None";
 	string name = "None";
+	string atribute = "None";
+	ourToken();
+	ourToken(string nname);
+	ourToken(int num);
 };
 class Automat
 {
@@ -22,6 +26,6 @@ public:
 
 	vector<vector<int>> TransitTable;
 	//func that will return tokens from given(current) line
-	vector<Token> getTokens(string& line);
+	vector<ourToken> getTokens(string& line);
 };
 

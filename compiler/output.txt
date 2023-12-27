@@ -16,9 +16,6 @@ PROCEDURE
 						, Del
 						VARLIST
 							c Id
-							, Del
-							VARLIST
-								k Id
 				: Del
 				Type
 					integer Keyword
@@ -26,53 +23,21 @@ PROCEDURE
 			DescrList
 				Descr
 					VARLIST
-						f Id
-						, Del
-						VARLIST
-							u Id
+						d Id
 					: Del
 					Type
 						char Keyword
 					; Del
 	OPERATORS
 		OP
-			c Id
+			a Id
 			:= Op
 			EXPR
 				SIMPLE_EXPR
-					( Del
-					EXPR
-						SIMPLE_EXPR
-							2 Const
-						+ Op
-						SIMPLE_EXPR
-							a Id
-					) Del
-				- Op
-				SIMPLE_EXPR
 					b Id
-			; Del
-		OPERATORS
-			OP
-				c Id
-				:= Op
-				EXPR
-					SIMPLE_EXPR
-						a Id
-					+ Op
-					SIMPLE_EXPR
-						b Id
-				; Del
-			OPERATORS
-				OP
+				+ Op
+				SIMPLE_EXPR
 					c Id
-					:= Op
-					EXPR
-						SIMPLE_EXPR
-							a Id
-						+ Op
-						SIMPLE_EXPR
-							b Id
-					; Del
+			; Del
 	END
 		end Keyword

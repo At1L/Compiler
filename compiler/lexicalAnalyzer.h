@@ -10,11 +10,11 @@ class lexicalAnalyzer
 public:
 	lexicalAnalyzer();
 	Hash hash;
-	vector<Token> tokens;
+	vector<ourToken> tokens;
 	void addTokens(string& line);
 	void backPos(ifstream& in, string s);
 	string curWord(ifstream& fin);
 	void pushHash(string& str);
-	Token parse(ifstream& in);
+	ourToken parse(ifstream& in);
 };
 

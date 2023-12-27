@@ -1,0 +1,3 @@
+C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\compiler.vcxproj.MdMergeInputs.cache
+C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\compiler.vcxproj.cppwinrt_plat.cache
+C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\compiler.vcxproj.cppwinrt_comp.cache

@@ -6,7 +6,7 @@ using ll = long long;
 using namespace std;
 
 struct Node{
-	Token val;
+	ourToken val;
 	Node* prev = NULL;
 	Node* next = NULL;
 };
@@ -16,6 +16,8 @@ public:
 	Hash();
 	vector<Node> table;
 	ll getTableId(string& word);
-	void addToken(Token t);
+	void addToken(ourToken t);
+	ourToken findToken(ourToken& ourToken);
+	void setNewAtribute(string tokenName, string newAtr);
 };
 

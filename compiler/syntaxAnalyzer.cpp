@@ -10,7 +10,7 @@ bool syntaxAnalyzer::Procedure(SyntaxTree& tree)
     temp.cleaner();
 
     temp.setRoot("DescrList");
-	Token buff = lex.parse(in);
+	ourToken buff = lex.parse(in);
 	if (buff.name != "var") {
 		std::cout << "Var not found\n";
 		return 0;
@@ -38,7 +38,7 @@ bool syntaxAnalyzer::Procedure(SyntaxTree& tree)
 
 bool syntaxAnalyzer::Begin(SyntaxTree& tree)
 {
-    Token elem = lex.parse(in);
+    ourToken elem = lex.parse(in);
     if (elem.name != "procedure") {
         cout << "Wrong begin\n";
         return 0;
@@ -73,8 +73,8 @@ bool syntaxAnalyzer::Description(SyntaxTree& tree)
     tree.insertSon(temp, "DescrList");
 	SyntaxTree tmp("DescrList");
 	//tree.addNode("DescrList", tree.getRoot().getData());
-	Token buff = lex.parse(in);
-	Token buff_ = lex.parse(in);
+	ourToken buff = lex.parse(in);
+	ourToken buff_ = lex.parse(in);
 	if (buff.type == "Id" && buff_.name == ":=") {
 		lex.backPos(in, buff_.name);
 		lex.backPos(in, buff.name);
@@ -94,8 +94,8 @@ bool syntaxAnalyzer::Descr(SyntaxTree& tree)
     SyntaxTree temp("VARLIST");
     if (!VarList(temp))
         return 0;
-	Token buff = lex.parse(in);
-	Token buff_ = lex.parse(in);
+	ourToken buff = lex.parse(in);
+	ourToken buff_ = lex.parse(in);
 	if (buff.type == "Id" && buff_.name == ":=") {
 		lex.backPos(in, buff_.name);
 		lex.backPos(in, buff.name);
@@ -106,7 +106,7 @@ bool syntaxAnalyzer::Descr(SyntaxTree& tree)
 	tree.addNode("VARLIST", tree.getRoot().getData());
     tree.insertNode(temp, "VARLIST");
     temp.cleaner();
-    Token elem = lex.parse(in);
+    ourToken elem = lex.parse(in);
     if (elem.name != ":") {
 		return 0;
     }
@@ -123,12 +123,12 @@ bool syntaxAnalyzer::Descr(SyntaxTree& tree)
 
 bool syntaxAnalyzer::VarList(SyntaxTree& tree)
 {
-    Token elem = lex.parse(in);
+    ourToken elem = lex.parse(in);
     if (elem.type != "Id") {
 		cout << "Varlist error\n";
 		return 0;
     }
-	Token buff = elem;
+	ourToken buff = elem;
 	elem = lex.parse(in);
 	if (elem.name == ":=") {
 		lex.backPos(in, elem.name);
@@ -158,7 +158,7 @@ bool syntaxAnalyzer::VarList(SyntaxTree& tree)
 }
 bool syntaxAnalyzer::MaxVerstappen(SyntaxTree& tree)
 {
-	Token elem = lex.parse(in);
+	ourToken elem = lex.parse(in);
 	if (elem.type != "Id") {
 		cout << "Varlist error\n";
 		return 0;
@@ -186,7 +186,7 @@ bool syntaxAnalyzer::MaxVerstappen(SyntaxTree& tree)
 
 bool syntaxAnalyzer::Operators(SyntaxTree& tree)
 {
-	Token elem = lex.parse(in);
+	ourToken elem = lex.parse(in);
 	if (elem.type != "Id") {
 		lex.backPos(in, elem.name);
 		tree.getRoot().setData("");
@@ -209,7 +209,7 @@ bool syntaxAnalyzer::Operators(SyntaxTree& tree)
 bool syntaxAnalyzer::Op(SyntaxTree& tree)
 {
 	SyntaxTree temp;
-	Token elem = lex.parse(in);
+	ourToken elem = lex.parse(in);
 	if (elem.type == "Id") {
 		tree.addNode(elem.name + " " + elem.type, "OP");
 		elem = lex.parse(in);
@@ -250,7 +250,7 @@ bool syntaxAnalyzer::Expr(SyntaxTree& tree)
 		return 0;
 	tree.addNode("SIMPLE_EXPR", "EXPR");
 	tree.insertNode(temp, "SIMPLE_EXPR");
-	Token elem = lex.parse(in);
+	ourToken elem = lex.parse(in);
 	if (elem.name != "+" && elem.name != "-") {
 		lex.backPos(in, elem.name);
 		return 1;
@@ -264,7 +264,7 @@ bool syntaxAnalyzer::Expr(SyntaxTree& tree)
 
 bool syntaxAnalyzer::SimplExpr(SyntaxTree& tree)
 {
-	Token elem = lex.parse(in);
+	ourToken elem = lex.parse(in);
 	if (elem.name == ";") {
 		lex.backPos(in, elem.name);
 		return 1;
@@ -294,7 +294,7 @@ bool syntaxAnalyzer::SimplExpr(SyntaxTree& tree)
 
 bool syntaxAnalyzer::End(SyntaxTree& tree)
 {
-	Token elem = lex.parse(in);
+	ourToken elem = lex.parse(in);
 	if (elem.name != "end") {
 		return 0;
 	}

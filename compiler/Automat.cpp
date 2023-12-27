@@ -19,8 +19,8 @@ Automat::Automat()
         this->TransitTable[2][i] = 2;
     }  
 }
-void distributeByState(int& curState, string& buff, vector<Token>& tokens, vector<string>& keywords) {
-    Token buffToken;
+void distributeByState(int& curState, string& buff, vector<ourToken>& tokens, vector<string>& keywords) {
+    ourToken buffToken;
     if (curState == 1) {
         buffToken.type = "Id";
         for (string key : keywords) {
@@ -42,14 +42,14 @@ void distributeByState(int& curState, string& buff, vector<Token>& tokens, vecto
         tokens.push_back(buffToken);
     }
 }
-bool isOp(vector<Token>& tokens, char c, string& buff, int& curState, vector<string>& keywords, vector<char>& opExpr) {
+bool isOp(vector<ourToken>& tokens, char c, string& buff, int& curState, vector<string>& keywords, vector<char>& opExpr) {
     for (char op : opExpr) {
-        //if c(char) is op we must save token for word befor c and then save c
+        //if c(char) is op we must save ourToken for word befor c and then save c
         if (c == op) {
-            Token buffToken;
-            //save token for word befor c
+            ourToken buffToken;
+            //save ourToken for word befor c
             distributeByState(curState, buff, tokens, keywords);
-            //save c token
+            //save c ourToken
             curState = 0;
             buff = "";
             buffToken.type = "Op";
@@ -62,14 +62,14 @@ bool isOp(vector<Token>& tokens, char c, string& buff, int& curState, vector<str
     return false;
 }
 //same as isOp but for delimiters
-bool isDelimiter(vector<Token>& tokens, char c, string& buff, int& curState, vector<string>& keywords, vector<char>& delExpr) {
+bool isDelimiter(vector<ourToken>& tokens, char c, string& buff, int& curState, vector<string>& keywords, vector<char>& delExpr) {
     for (char del : delExpr) {
-        //if c(char) is delimiter we must save token for word befor c and then save c
+        //if c(char) is delimiter we must save ourToken for word befor c and then save c
         if (c == del) {
-            Token buffToken;
-            //save token for word befor c
+            ourToken buffToken;
+            //save ourToken for word befor c
             distributeByState(curState, buff, tokens, keywords);
-            //save c token
+            //save c ourToken
             curState = 0;
             buff = "";
             buffToken.type = "Del";
@@ -81,9 +81,9 @@ bool isDelimiter(vector<Token>& tokens, char c, string& buff, int& curState, vec
     }
     return false;
 }
-vector<Token> Automat::getTokens(string& line)
+vector<ourToken> Automat::getTokens(string& line)
 {
-    vector<Token> tokens;
+    vector<ourToken> tokens;
     string buff = "";
     int curState = 0;
     for (int i = 0; i < line.size(); ++i) {
@@ -98,7 +98,7 @@ vector<Token> Automat::getTokens(string& line)
                 i++;
             }
             strBuff += '"';
-            Token buffToken;
+            ourToken buffToken;
             buffToken.type = "strConst";
             buffToken.name = strBuff;
             tokens.push_back(buffToken);
@@ -126,4 +126,36 @@ vector<Token> Automat::getTokens(string& line)
         distributeByState(curState, buff, tokens, this->keywords);
     }
     return tokens;
+}
+
+ourToken::ourToken()
+{
+}
+
+ourToken::ourToken(string nname)
+{
+    bool space = false;
+    string type = "";
+    string name = "";
+    for (auto c : nname) {
+        if (c == ' ') space = true;
+        if (!space) {
+            name += c;
+        }
+        else {
+            type += c;
+        }
+    }
+    this->type = type;
+    this->name = name;
+
+
+}
+
+ourToken::ourToken(int num)
+{
+    if (num == -1) {
+        this->name = "Bad";
+        this->type = "Bad";
+    }
 }

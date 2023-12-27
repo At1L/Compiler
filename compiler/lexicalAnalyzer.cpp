@@ -7,7 +7,7 @@ lexicalAnalyzer::lexicalAnalyzer()
 void lexicalAnalyzer::addTokens(string& line)
 {
 	Automat automat;
-	vector<Token> buffTokens = automat.getTokens(line);
+	vector<ourToken> buffTokens = automat.getTokens(line);
 	for (auto t : buffTokens) {
 		this->tokens.push_back(t);
 	}
@@ -124,17 +124,17 @@ void lexicalAnalyzer::pushHash(string& str)
     hash.addToken(autom.getTokens(str)[0]);
 }
 
-Token lexicalAnalyzer::parse(ifstream& in)
+ourToken lexicalAnalyzer::parse(ifstream& in)
 {
 	Automat a;
 	string buff = curWord(in);
     if (buff == ":=") {
-        Token token;
-        token.name = ":=";
-        token.type = "Op";
-        return token;
+        ourToken ourToken;
+        ourToken.name = ":=";
+        ourToken.type = "Op";
+        return ourToken;
     }
-    if (buff.empty()) return Token();
-    Token token = a.getTokens(buff)[0];
-	return token;
+    if (buff.empty()) return ourToken();
+    ourToken ourToken = a.getTokens(buff)[0];
+	return ourToken;
 }

@@ -8,8 +8,11 @@ private:
 	std::string data;
 	std::vector<TreeNode> childrens;
 public:
-	TreeNode() : data(""), childrens(std::vector<TreeNode>()) {};
-	TreeNode(std::string data) : data(data), childrens(std::vector<TreeNode>(0)) {};
+	std::string PolishCow;
+	std::string Type;
+	int cnt;
+	TreeNode() : data(""), childrens(std::vector<TreeNode>()), PolishCow(""), cnt(0), Type("") {};
+	TreeNode(std::string data) : data(data), childrens(std::vector<TreeNode>(0)), PolishCow(""), cnt(0), Type("") {};
 
 	std::string getData() { return data; }
 	std::vector<TreeNode>& getChildren() { return childrens; }

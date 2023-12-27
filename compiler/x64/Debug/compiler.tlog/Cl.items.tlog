@@ -2,5 +2,6 @@ C:\Users\Arseny\Desktop\EMP\compiler\compiler\Automat.cpp;C:\Users\Arseny\Deskto
 C:\Users\Arseny\Desktop\EMP\compiler\compiler\compiler.cpp;C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\compiler.obj
 C:\Users\Arseny\Desktop\EMP\compiler\compiler\Hash.cpp;C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\Hash.obj
 C:\Users\Arseny\Desktop\EMP\compiler\compiler\lexicalAnalyzer.cpp;C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\lexicalAnalyzer.obj
+C:\Users\Arseny\Desktop\EMP\compiler\compiler\semantica.cpp;C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\semantica.obj
 C:\Users\Arseny\Desktop\EMP\compiler\compiler\syntaxAnalyzer.cpp;C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\syntaxAnalyzer.obj
 C:\Users\Arseny\Desktop\EMP\compiler\compiler\SyntaxTree.cpp;C:\Users\Arseny\Desktop\EMP\compiler\compiler\x64\Debug\SyntaxTree.obj
