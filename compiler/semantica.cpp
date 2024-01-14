@@ -22,12 +22,6 @@ string semantica::Procedure(SyntaxTree& tree)
 	PolsckaKorova = Begin(tree.getRoot().getChildren()[0]) + '\n';
 	PolsckaKorova += Descriptions(tree.getRoot().getChildren()[1]) + '\n';
 	PolsckaKorova += Operators(tree.getRoot().getChildren()[2]) + '\n';
-
-
-	/*tree.getRoot().PolishCow = tree.getRoot().getChildren()[0].PolishCow + '\n' +
-		tree.getRoot().getChildren()[1].PolishCow + '\n' +
-		tree.getRoot().getChildren()[2].PolishCow + '\n' +
-		tree.getRoot().getChildren()[3].PolishCow + '\n';*/
 	cout << PolsckaKorova;
 	return tree.getRoot().PolishCow;
 	
@@ -35,7 +29,7 @@ string semantica::Procedure(SyntaxTree& tree)
 
 string semantica::Begin(TreeNode& tree)
 {
-	tree.PolishCow = Name(tree.getChildren()[1].getData()) + " DEFL";
+	tree.PolishCow = Name(tree.getChildren()[1].getData());
 	return tree.PolishCow;
 }
 
@@ -44,7 +38,7 @@ string semantica::Descr(TreeNode& tree)
 	tree.getChildren()[0].Type = Name(tree.getChildren()[2].getChildren()[0].getData());
 	string sbf = VarList(tree.getChildren()[0]);
 	int bf = tree.getChildren()[0].cnt + 1;
-	tree.PolishCow = Name(tree.getChildren()[2].getChildren()[0].getData()) + " " + sbf + " " + to_string(bf) + " DECL";
+	tree.PolishCow = Name(tree.getChildren()[2].getChildren()[0].getData()) + " " + sbf + " " + to_string(bf);
 	return tree.PolishCow;
 }
 string semantica::DescrList(TreeNode& tree)

@@ -34,10 +34,10 @@ PROCEDURE
 			:= Op
 			EXPR
 				SIMPLE_EXPR
-					b Id
+					1 Const
 				+ Op
 				SIMPLE_EXPR
-					c Id
+					"ggg" strConst
 			; Del
 	END
 		end Keyword

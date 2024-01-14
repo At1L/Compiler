@@ -1,2 +1,4 @@
-﻿  semantica.cpp
+﻿  compiler.cpp
+  semantica.cpp
+  Создание кода...
   compiler.vcxproj -> C:\Users\Arseny\Desktop\EMP\compiler\x64\Debug\compiler.exe

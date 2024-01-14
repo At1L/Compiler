@@ -2,7 +2,7 @@ procedure test; begin
 var
 a, b, c : integer;
 d : char;
-a := b + c;
+a := 1 + "ggg";
 end                                                              
 
 
